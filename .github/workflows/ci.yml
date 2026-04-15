@@ -16,4 +16,4 @@ jobs:
         run: ls -la
       
       - name: Lister le contenu du jeu "Two Ships Passing"
-        run: ls -la "Two_Ships_Passing_The_Night"
+        run: ls -la "Games/Two_Ships_Passing_The_Night"
