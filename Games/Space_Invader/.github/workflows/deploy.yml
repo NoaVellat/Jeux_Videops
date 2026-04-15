@@ -7,31 +7,31 @@ on:
 
 jobs:
   deploy:
-    name: 🚀 Déployer Space_Invader
+    name:  Déployer Space_Invader
     runs-on: ubuntu-latest
     steps:
-      - name: 📥 Récupérer le code
+      - name:  Récupérer le code
         uses: actions/checkout@v4
       
-      - name: 🔧 Installer Node.js
+      - name: Installer Node.js
         uses: actions/setup-node@v4
         with:
           node-version: '20'
       
-      - name: 📦 Installer les dépendances
+      - name:  Installer les dépendances
         working-directory: ./Games/Space_Invader
         run: npm ci || npm install
       
-      - name: 🏗️ Build du jeu
+      - name:  Build du jeu
         working-directory: ./Games/Space_Invader
         run: npm run build
       
-      - name: 📂 Préparer les fichiers
+      - name:  Préparer les fichiers
         run: |
           mkdir -p deploy
           cp -r Games/Space_Invader/build/* deploy/ 2>/dev/null || cp Games/Space_Invader/index.html deploy/
       
-      - name: 📤 Déployer sur GitHub Pages
+      - name:  Déployer sur GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
