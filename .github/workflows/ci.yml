@@ -8,7 +8,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Lister les dossiers à la racine
+      
+      - name: Lister tout à la racine
         run: ls -la
-      - name: Essayer d'entrer dans le jeu 1
+      
+      - name: Lister le contenu du jeu "Two Ships Passing"
         run: ls -la "Two Ships Passing"
