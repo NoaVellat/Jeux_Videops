@@ -11,4 +11,4 @@ jobs:
       - name: Lister les dossiers à la racine
         run: ls -la
       - name: Essayer d'entrer dans le jeu 1
-        run: ls -la "js13k-2021-fd4b9e6e1954b8850125c0a7a0219db0607bf37e"
+        run: ls -la "Two Ships Passing"
