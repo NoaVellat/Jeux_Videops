@@ -1,6 +1,9 @@
-name: CI
+name: CI   
 
 on:
+  pull_request:
+    branches:
+      - main
   workflow_dispatch:
 
 jobs:
@@ -13,4 +16,4 @@ jobs:
         run: ls -la
       
       - name: Lister le contenu du jeu "Two Ships Passing"
-        run: ls -la "Two Ships Passing"
+        run: ls -la "Two_Ships_Passing_The_Night"
