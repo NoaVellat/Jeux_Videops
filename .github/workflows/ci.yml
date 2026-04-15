@@ -4,6 +4,7 @@ on:
   pull_request:
     branches:
       - main
+  push:
   workflow_dispatch:
 
 jobs:
@@ -17,3 +18,4 @@ jobs:
       
       - name: Lister le contenu du jeu "Two Ships Passing"
         run: ls -la "Games/Two_Ships_Passing_The_Night"
+        run: ls -la "Games/Space_Invader"
