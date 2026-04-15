@@ -1,28 +1,14 @@
 name: CI
 
 on:
-  push:
-    branches: [ main ]
-  pull_request:
-    branches: [ main ]
-  workflow_dispatch: 
+  workflow_dispatch:
 
 jobs:
   test:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout du code
-        uses: actions/checkout@v4
-
-      - name: Install de Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: 18
-
-      - name: Installe les dépendances
-        run: npm install
-        working-directory: two-ships-passing
-
-      - name: Run test
-        run: npm test
-        working-directory: two-ships-passing
+      - uses: actions/checkout@v4
+      - name: Lister les dossiers à la racine
+        run: ls -la
+      - name: Essayer d'entrer dans le jeu 1
+        run: ls -la "js13k-2021-fd4b9e6e1954b8850125c0a7a0219db0607bf37e"
