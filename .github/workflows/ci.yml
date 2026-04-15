@@ -12,18 +12,15 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout du code
-        uses: actions/checkout@v4       # Clone le repo
+        uses: actions/checkout@v4
 
       - name: Install de Node.js
-        uses: actions/setup-node@v4     # Install Node.js
+        uses: actions/setup-node@v4
         with:
           node-version: 18
 
-      - name: indique d'aller dans le dossier 
-        run: cd js13k-2021-fd4b9e6e1954b8850125c0a7a0219db0607bf37e
-
       - name: Installe les dépendances
-        run: npm install                # Install les dependances 
+        run: npm install
         working-directory: two-ships-passing
 
       - name: Run test
