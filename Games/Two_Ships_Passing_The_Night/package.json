@@ -4,10 +4,12 @@
   "description": "https://razh.github.io/js13k-2021",
   "main": "index.js",
   "scripts": {
+    "lint": "eslint src/**/*.js",
+    "lint:fix": "eslint src/**/*.js --fix",
     "dev": "vite",
     "build": "vite build",
     "serve": "vite preview",
-    "test": "echo \"No tests yet\" && exit 0"
+    "test": "echo \"✅ Tests unitaires - À implémenter\" && exit 0"
   },
   "repository": {
     "type": "git",
@@ -22,7 +24,8 @@
   "devDependencies": {
     "del": "6.0.0",
     "escape-string-regexp": "5.0.0",
-    "eslint": "7.32.0",
+    "eslint": "8.57.0",
+    "eslint-config-google": "0.14.0",
     "eslint-config-prettier": "8.3.0",
     "eslint-plugin-prettier": "4.0.0",
     "eslint-plugin-simple-import-sort": "7.0.0",

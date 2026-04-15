@@ -1,20 +1,39 @@
-name: Build and Deploy
+name: Deploy - Space_Invader
+
 on:
   push:
-    branches:
-      - main
+    branches: [main]
+  workflow_dispatch:
+
 jobs:
-  build-and-deploy:
+  deploy:
+    name: 🚀 Déployer Space_Invader
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - name: 📥 Récupérer le code
+        uses: actions/checkout@v4
+      
+      - name: 🔧 Installer Node.js
+        uses: actions/setup-node@v4
         with:
-          persist-credentials: false
-      - uses: actions/checkout@v2
-      - run: yarn install --frozen-lockfile
-      - run: yarn build
-      - uses: JamesIves/github-pages-deploy-action@releases/v3
+          node-version: '20'
+      
+      - name: 📦 Installer les dépendances
+        working-directory: ./Games/Space_Invader
+        run: npm ci || npm install
+      
+      - name: 🏗️ Build du jeu
+        working-directory: ./Games/Space_Invader
+        run: npm run build
+      
+      - name: 📂 Préparer les fichiers
+        run: |
+          mkdir -p deploy
+          cp -r Games/Space_Invader/build/* deploy/ 2>/dev/null || cp Games/Space_Invader/index.html deploy/
+      
+      - name: 📤 Déployer sur GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
         with:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          BRANCH: gh-pages
-          FOLDER: build
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./deploy
+          publish_branch: gh-pages

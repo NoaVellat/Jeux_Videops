@@ -1,0 +1,35 @@
+{
+  "name": "jeux_videops",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+  "test": "jest",
+  "test:coverage": "jest --coverage",
+  "lint": "eslint 'Games/**/*.js'",
+  "lint:fix": "eslint 'Games/**/*.js' --fix"
+  },
+
+    "jest": {
+    "testMatch": ["**/tests/**/*.test.js", "**/Games/**/*.test.js"],
+    "testEnvironment": "node"
+  },
+  
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/NoaVellat/Jeux_Videops.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/NoaVellat/Jeux_Videops/issues"
+  },
+  "homepage": "https://github.com/NoaVellat/Jeux_Videops#readme",
+  "devDependencies": {
+    "eslint": "^10.2.0",
+    "eslint-config-google": "^0.14.0",
+    "jest": "^30.3.0"
+  }
+}

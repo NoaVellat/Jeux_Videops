@@ -1,21 +1,72 @@
-name: CI   
+name: CI - Vérification des jeux
 
 on:
-  pull_request:
-    branches:
-      - main
   push:
+    branches: 
+    - main
+  pull_request:
+    branches: 
+    - main
   workflow_dispatch:
 
 jobs:
-  test:
+  # ===== Job 1 : Test simple de validation =====
+  test-simple:
+    name: 🔧 Test de validation
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - name: 📥 Récupérer le code
+        uses: actions/checkout@v4
       
-      - name: Lister tout à la racine
-        run: ls -la
+      - name: 🔧 Installer Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
       
-      - name: Lister le contenu du jeu "Two Ships Passing"
-        run: ls -la "Games/Two_Ships_Passing_The_Night"
-        
+      - name: 📦 Installer les dépendances racine
+        run: npm ci
+      
+      - name: 🧪 Lancer les tests
+        run: npm test
+
+  # ===== Job 2 : Linter pour Two_Ships =====
+  lint-two-ships:
+    name: 🚀 Two_Ships - Linter
+    runs-on: ubuntu-latest
+    steps:
+      - name: 📥 Récupérer le code
+        uses: actions/checkout@v4
+      
+      - name: 🔧 Installer Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      
+      - name: 📦 Installer les dépendances
+        working-directory: ./Games/Two_Ships_Passing_The_Night
+        run: npm ci || npm install
+      
+      - name: 🧹 Linter Google Style
+        working-directory: ./Games/Two_Ships_Passing_The_Night
+        run: npm run lint
+
+  # ===== Job 3 : Linter pour Space_Invader =====
+  lint-space-invader:
+    name: 👾 Space_Invader - Linter
+    runs-on: ubuntu-latest
+    steps:
+      - name: 📥 Récupérer le code
+        uses: actions/checkout@v4
+      
+      - name: 🔧 Installer Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      
+      - name: 📦 Installer les dépendances
+        working-directory: ./Games/Space_Invader
+        run: npm ci || npm install
+      
+      - name: 🧹 Linter Google Style
+        working-directory: ./Games/Space_Invader
+        run: npm run lint
