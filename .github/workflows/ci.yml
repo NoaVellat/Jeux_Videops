@@ -1,0 +1,29 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - main 
+  pull_request:
+    branches:
+      - main 
+  workflow_dispatch: 
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name : Checkout du code 
+        uses: actions/checkout@v4
+
+      - name : Install de Node.js 
+        uses: actions/checkout@v4
+        with:
+          node-version: 18 
+      - name : Installe les dependances 
+        run: npm ci 
+
+      - name : Run test 
+        run: npm test
+
+
