@@ -104,7 +104,7 @@ jobs:
       
       - name:  Annotation échec
         if: failure()
-        run: echo "::error::"Space_Invader n'a pas passé la validation"
+        run: echo "::error::❌ Space_Invader n'a pas passé la validation"
 
               # ===== Job 4 : Résumé global =====
 
