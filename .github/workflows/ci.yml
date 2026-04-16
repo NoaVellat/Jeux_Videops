@@ -12,109 +12,109 @@ on:
 jobs:
               # ===== Job 1 : Test simple de validation =====
   test-simple:
-    name: 🔧 Test de validation
+    name:  Test de validation
     runs-on: ubuntu-latest
     steps:
-      - name: 📥 Récupérer le code
+      - name:  Récupérer le code
         uses: actions/checkout@v4
       
-      - name: 🔧 Installer Node.js
+      - name:  Installer Node.js
         uses: actions/setup-node@v4
         with:
           node-version: '20'
       
-      - name: 📦 Installer les dépendances racine
+      - name:  Installer les dépendances racine
         run: npm ci
       
-      - name: 🧪 Lancer les tests
+      - name:  Lancer les tests
         run: npm test
       
-      - name: 🔒 Audit des dépendances racine
+      - name:  Audit des dépendances racine
         run: npm audit --omit=dev || echo "::warning::⚠️ Vulnérabilités détectées"
 
               # ===== Job 2 : Linter + Tests pour Two_Ships =====
 
   lint-two-ships:
-    name: 🚀 Two_Ships - Linter & Tests
+    name:  Two_Ships - Linter & Tests
     runs-on: ubuntu-latest
     steps:
-      - name: 📥 Récupérer le code
+      - name:  Récupérer le code
         uses: actions/checkout@v4
       
-      - name: 🔧 Installer Node.js
+      - name:  Installer Node.js
         uses: actions/setup-node@v4
         with:
           node-version: '20'
       
-      - name: 📦 Installer les dépendances RACINE (ESLint config)
+      - name:  Installer les dépendances RACINE (ESLint config)
         run: npm ci
       
-      - name: 📦 Installer les dépendances du jeu
+      - name:  Installer les dépendances du jeu
         working-directory: ./Games/Two_Ships_Passing_The_Night
         run: npm ci || npm install
       
-      - name: 🧹 Linter Google Style
+      - name:  Linter Google Style
         working-directory: ./Games/Two_Ships_Passing_The_Night
         run: npm run lint
       
-      - name: 🧪 Tests unitaires et fonctionnels
+      - name:  Tests unitaires et fonctionnels
         working-directory: ./Games/Two_Ships_Passing_The_Night
         run: npm test
       
-      - name: 🔒 Audit des dépendances
+      - name:  Audit des dépendances
         working-directory: ./Games/Two_Ships_Passing_The_Night
         run: npm audit --omit=dev || echo "::warning::⚠️ Vulnérabilités détectées dans Two_Ships"
       
-      - name: ❌ Annotation échec
+      - name:  Annotation échec
         if: failure()
-        run: echo "::error::❌ Two_Ships n'a pas passé la validation"
+        run: echo "::error:: Two_Ships n'a pas passé la validation"
 
               # ===== Job 3 : Linter + Tests pour Space_Invader =====
 
   lint-space-invader:
-    name: 👾 Space_Invader - Linter & Tests
+    name:  Space_Invader - Linter & Tests
     runs-on: ubuntu-latest
     steps:
-      - name: 📥 Récupérer le code
+      - name:  Récupérer le code
         uses: actions/checkout@v4
       
-      - name: 🔧 Installer Node.js
+      - name:  Installer Node.js
         uses: actions/setup-node@v4
         with:
           node-version: '20'
       
-      - name: 📦 Installer les dépendances RACINE (ESLint config)
+      - name:  Installer les dépendances RACINE (ESLint config)
         run: npm ci
       
-      - name: 📦 Installer les dépendances du jeu
+      - name:  Installer les dépendances du jeu
         working-directory: ./Games/Space_Invader
         run: npm ci || npm install
       
-      - name: 🧹 Linter Google Style
+      - name:  Linter Google Style
         working-directory: ./Games/Space_Invader
         run: npm run lint
       
-      - name: 🧪 Tests unitaires et fonctionnels
+      - name:  Tests unitaires et fonctionnels
         working-directory: ./Games/Space_Invader
         run: npm test
       
-      - name: 🔒 Audit des dépendances
+      - name:  Audit des dépendances
         working-directory: ./Games/Space_Invader
         run: npm audit --omit=dev || echo "::warning::⚠️ Vulnérabilités détectées dans Space_Invader"
       
-      - name: ❌ Annotation échec
+      - name:  Annotation échec
         if: failure()
-        run: echo "::error::❌ Space_Invader n'a pas passé la validation"
+        run: echo "::error:: Space_Invader n'a pas passé la validation"
 
               # ===== Job 4 : Résumé global =====
 
   summary:
-    name: 📋 Résumé global
+    name:  Résumé global
     runs-on: ubuntu-latest
     needs: [test-simple, lint-two-ships, lint-space-invader]
     if: always()
     steps:
-      - name: 📊 Générer le rapport
+      - name:  Générer le rapport
         run: |
           echo "# Rapport d'execution de la Pipeline CI" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
