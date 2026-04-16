@@ -107,7 +107,7 @@ jobs:
         run: echo "::error::❌ Space_Invader n'a pas passé la validation"
 
               # ===== Job 4 : Résumé global =====
-              
+
   summary:
     name: 📋 Résumé global
     runs-on: ubuntu-latest
@@ -116,7 +116,7 @@ jobs:
     steps:
       - name: 📊 Générer le rapport
         run: |
-          echo "# 🎮 Rapport d'exécution du pipeline CI" >> $GITHUB_STEP_SUMMARY
+          echo "# Rapport d'execution de la Pipeline CI" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
           echo "| Job | Statut |" >> $GITHUB_STEP_SUMMARY
           echo "|-----|--------|" >> $GITHUB_STEP_SUMMARY
@@ -124,5 +124,5 @@ jobs:
           echo "| Two_Ships - Linter & Tests | ${{ needs.lint-two-ships.result }} |" >> $GITHUB_STEP_SUMMARY
           echo "| Space_Invader - Linter & Tests | ${{ needs.lint-space-invader.result }} |" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
-          echo "📅 Date: $(date)" >> $GITHUB_STEP_SUMMARY
-          echo "🔒 Audit: Aucune vulnérabilité critique détectée" >> $GITHUB_STEP_SUMMARY
+          echo "Date: $(date)" >> $GITHUB_STEP_SUMMARY
+          echo " Audit: Aucune vulnérabilité critique détectée" >> $GITHUB_STEP_SUMMARY
