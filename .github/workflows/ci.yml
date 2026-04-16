@@ -67,7 +67,7 @@ jobs:
       
       - name:  Annotation échec
         if: failure()
-        run: echo "::error:: Two_Ships n'a pas passé la validation"
+        run: echo "::error::"Two_Ships n'a pas passé la validation"
 
               # ===== Job 3 : Linter + Tests pour Space_Invader =====
 
@@ -104,7 +104,7 @@ jobs:
       
       - name:  Annotation échec
         if: failure()
-        run: echo "::error::❌ Space_Invader n'a pas passé la validation"
+        run: echo "::error::"Space_Invader n'a pas passé la validation"
 
               # ===== Job 4 : Résumé global =====
 
