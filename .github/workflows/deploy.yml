@@ -5,6 +5,11 @@ on:
     branches: [main]
   workflow_dispatch:
 
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
 jobs:
   deploy:
     name: 🚀 Déployer la plateforme
@@ -25,22 +30,21 @@ jobs:
           # Copier Two_Ships
           cp -r Games/Two_Ships_Passing_The_Night deploy/Two_Ships
           
-          # Copier Space_Invader (depuis son dossier source)
+          # Copier Space_Invader
           cp -r Games/Space_Invader deploy/Space_Invader
           
-          # Créer un fichier .nojekyll pour éviter les problèmes
+          # Créer un fichier .nojekyll
           touch deploy/.nojekyll
           
-          # Afficher la structure pour vérifier
+          echo "📁 Structure du déploiement :"
           ls -la deploy/
-          ls -la deploy/Space_Invader/
       
       - name: 📤 Déployer sur GitHub Pages
-        uses: peaceiris/actions-gh-pages@v3
+        uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./deploy
-          publish_branch: gh-pages
           user_name: 'github-actions[bot]'
           user_email: 'github-actions[bot]@users.noreply.github.com'
           commit_message: '🚀 Déploiement automatique'
+          publish_branch: gh-pages
