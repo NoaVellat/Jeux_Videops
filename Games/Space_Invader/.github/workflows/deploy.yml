@@ -1,40 +1,62 @@
-name: Deploy - Space_Invader
+name: Déploiement sur GitHub Pages
 
 on:
   push:
-    branches:
-      - main 
+    branches: [main]
   workflow_dispatch:
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
 
 jobs:
   deploy:
-    name:  Déployer Space_Invader
     runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    
     steps:
-      - name:  Récupérer le code
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
       
-      - name: Installer Node.js
+      - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: '20'
       
-      - name:  Installer les dépendances
+      - name: Build Space_Invader
         working-directory: ./Games/Space_Invader
-        run: npm ci || npm install
-      
-      - name:  Build du jeu
-        working-directory: ./Games/Space_Invader
-        run: npm run build
-      
-      - name:  Préparer les fichiers
         run: |
-          mkdir -p deploy
-          cp -r Games/Space_Invader/build/* deploy/ 2>/dev/null || cp Games/Space_Invader/index.html deploy/
+          npm install
+          npm run build
+          echo "✅ Build terminé"
+          ls -la build/
       
-      - name:  Déployer sur GitHub Pages
-        uses: peaceiris/actions-gh-pages@v3
+      - name: Prepare deployment files
+        run: |
+          rm -rf ./_site
+          mkdir -p ./_site
+          
+          # Page d'accueil
+          cp index.html ./_site/
+          
+          # Two Ships
+          cp -r Games/Two_Ships_Passing_The_Night ./_site/Two_Ships
+          
+          # Space_Invader : copier UNIQUEMENT le contenu du build/
+          mkdir -p ./_site/Space_Invader
+          cp -r Games/Space_Invader/build/* ./_site/Space_Invader/
+          
+          touch ./_site/.nojekyll
+          echo "📁 Contenu final de Space_Invader :"
+          ls -la ./_site/Space_Invader/
+      
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./deploy
-          publish_branch: gh-pages
+          path: ./_site
+      
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
